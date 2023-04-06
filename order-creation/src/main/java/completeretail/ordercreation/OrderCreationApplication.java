@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
+import completeretail.ordercreation.GenerateOrder;
+import completeretail.ordercreation.AvroSerializer;
 
 
 
@@ -26,8 +28,15 @@ public class OrderCreationApplication {
 	@Bean
 	public Supplier<String> publishOrder() {
 		return () -> {
-			log.info("Emitting " + "hello world");
-			return "hello world";
+			AvroSerializer serializer = new AvroSerializer();
+
+			log.info("Starting a new order");
+
+			GenerateOrder order = new GenerateOrder();
+			
+			//log.info("Order contents: " + order.getOrder().toString());
+
+			return order.getOrder().toString();
 		};
 	}
 	@Bean

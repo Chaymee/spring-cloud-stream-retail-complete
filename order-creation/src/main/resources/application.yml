@@ -5,42 +5,33 @@ spring:
     stream:
       bindings:
         publish-out-0:
-          destination: new.orders
-          binder: rabbit1
+          destination: test/retail/stream/order/new
+          binder: local-solace
       binders:
-        rabbit1:
-          type: rabbit
+        local-solace:
+          type: solace
           environment:
-            spring:
-              rabbitmq:
-                host: localhost
-                port: 5673
-                username: guest
-                password: guest
-#      bindings:
-#        sink-in-0:
-#          destination: TEMPS.Q
-#          #The presence of "group" tells the binder to follow the "consumer group" pattern
-#          group: SINK
-#          consumer:
-#            #Concurrency can be used with a consumer group (non-exclusive queue) to process events in multiple threads
-#            concurrency: 5
-#      binders:
-#        local-solace:
-#          type: solace
-#          environment:
-#            solace:
-#              java:
-#                host: tcp://localhost:55555
-#                msgVpn: default
-#                clientUsername: default
-#                clientPassword: default
-#      solace:
-#        bindings:
-#          sink-in-0:
-#            consumer:
-#              #This adds a topic subscription w/ wildcards to the queue created with a name of TEMPS.Q.SINK above
-#              queueAdditionalSubscriptions: sensor/temperature/>
+            solace:
+              java:
+                host: tcps://mr-connection-ue89hsrd3g0.messaging.solace.cloud:55443
+                msgVpn: testssh
+                clientUsername: solace-cloud-client
+                clientPassword: 4kgqg5g4b2jlooakeukpq8qqr6
+      # bindings:
+      #   publish-out-0:
+      #     destination: new.orders
+      #     binder: rabbit1
+      # binders:
+      #   rabbit1:
+      #     type: rabbit
+      #     environment:
+      #       spring:
+      #         rabbitmq:
+      #           host: localhost
+      #           port: 5673
+      #           username: guest
+      #           password: guest
+
 
 server:
   port: 8093
