@@ -2,15 +2,15 @@ package completeretail.ordercreation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.stream.binder.BinderHeaders;
 import org.springframework.context.annotation.Bean;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.messaging.Message;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.function.Supplier;
 import java.util.function.Consumer;
-import completeretail.ordercreation.GenerateOrder;
-import completeretail.ordercreation.AvroSerializer;
-
-
 
 @SpringBootApplication
 public class OrderCreationApplication {
@@ -26,17 +26,20 @@ public class OrderCreationApplication {
 	 * Configurable using spring.cloud.stream.poller.fixed-delay
 	 */
 	@Bean
-	public Supplier<String> publishOrder() {
+	public Supplier<Message<String>> publishOrder() {
 		return () -> {
-			AvroSerializer serializer = new AvroSerializer();
 
-			log.info("Starting a new order");
-
+      
+      log.info("Starting a new order");
+      
 			GenerateOrder order = new GenerateOrder();
+      JSONObject payload = new JSONObject(order.getOrder().toString());
 			
-			//log.info("Order contents: " + order.getOrder().toString());
+      String topic = "retail/pos/" + order.getOrder().getStore().toString().toLowerCase().replaceAll(" ", "_");
+      // Publish on dynamic topics
+      System.out.println("Publishing on topic: " + topic);
+      return MessageBuilder.withPayload(payload.toString(2)).setHeader(BinderHeaders.TARGET_DESTINATION, topic).build();
 
-			return order.getOrder().toString();
 		};
 	}
 	@Bean

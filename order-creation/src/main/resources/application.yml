@@ -5,7 +5,6 @@ spring:
     stream:
       bindings:
         publish-out-0:
-          destination: test/retail/stream/order/new
           binder: local-solace
       binders:
         local-solace:
@@ -13,25 +12,9 @@ spring:
           environment:
             solace:
               java:
-                host: tcps://mr-connection-ue89hsrd3g0.messaging.solace.cloud:55443
-                msgVpn: testssh
-                clientUsername: solace-cloud-client
-                clientPassword: 4kgqg5g4b2jlooakeukpq8qqr6
-      # bindings:
-      #   publish-out-0:
-      #     destination: new.orders
-      #     binder: rabbit1
-      # binders:
-      #   rabbit1:
-      #     type: rabbit
-      #     environment:
-      #       spring:
-      #         rabbitmq:
-      #           host: localhost
-      #           port: 5673
-      #           username: guest
-      #           password: guest
-
-
+                host: tcps://aws-ca-retail.messaging.solace.cloud:55443
+                msgVpn: aws-ca
+                clientUsername:
+                clientPassword:
 server:
   port: 8093
