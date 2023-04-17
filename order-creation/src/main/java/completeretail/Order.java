@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class Order extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5166646800348866175L;
+  private static final long serialVersionUID = 3154251031323173291L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"completeretail\",\"fields\":[{\"name\":\"orderNumber\",\"type\":\"long\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"store\",\"type\":\"string\"},{\"name\":\"requestTime\",\"type\":\"string\"},{\"name\":\"customerID\",\"type\":\"long\"},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"item\",\"fields\":[{\"name\":\"itemName\",\"type\":\"string\"},{\"name\":\"itemQuantity\",\"type\":\"int\"},{\"name\":\"itemPrice\",\"type\":\"double\"}]}}}],\"version\":\"1\"}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"Order\",\"namespace\":\"completeretail\",\"fields\":[{\"name\":\"orderNumber\",\"type\":\"long\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"store\",\"type\":\"string\"},{\"name\":\"requestTime\",\"type\":\"string\"},{\"name\":\"customerID\",\"type\":\"long\"},{\"name\":\"storeSize\",\"type\":\"int\"},{\"name\":\"items\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"item\",\"fields\":[{\"name\":\"itemName\",\"type\":\"string\"},{\"name\":\"itemQuantity\",\"type\":\"int\"},{\"name\":\"itemPrice\",\"type\":\"double\"}]}}}],\"version\":\"1\"}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -78,6 +78,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   private java.lang.CharSequence store;
   private java.lang.CharSequence requestTime;
   private long customerID;
+  private int storeSize;
   private java.util.List<completeretail.item> items;
 
   /**
@@ -94,14 +95,16 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
    * @param store The new value for store
    * @param requestTime The new value for requestTime
    * @param customerID The new value for customerID
+   * @param storeSize The new value for storeSize
    * @param items The new value for items
    */
-  public Order(java.lang.Long orderNumber, java.lang.CharSequence status, java.lang.CharSequence store, java.lang.CharSequence requestTime, java.lang.Long customerID, java.util.List<completeretail.item> items) {
+  public Order(java.lang.Long orderNumber, java.lang.CharSequence status, java.lang.CharSequence store, java.lang.CharSequence requestTime, java.lang.Long customerID, java.lang.Integer storeSize, java.util.List<completeretail.item> items) {
     this.orderNumber = orderNumber;
     this.status = status;
     this.store = store;
     this.requestTime = requestTime;
     this.customerID = customerID;
+    this.storeSize = storeSize;
     this.items = items;
   }
 
@@ -120,7 +123,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     case 2: return store;
     case 3: return requestTime;
     case 4: return customerID;
-    case 5: return items;
+    case 5: return storeSize;
+    case 6: return items;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -135,7 +139,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     case 2: store = (java.lang.CharSequence)value$; break;
     case 3: requestTime = (java.lang.CharSequence)value$; break;
     case 4: customerID = (java.lang.Long)value$; break;
-    case 5: items = (java.util.List<completeretail.item>)value$; break;
+    case 5: storeSize = (java.lang.Integer)value$; break;
+    case 6: items = (java.util.List<completeretail.item>)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -226,6 +231,23 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
   }
 
   /**
+   * Gets the value of the 'storeSize' field.
+   * @return The value of the 'storeSize' field.
+   */
+  public int getStoreSize() {
+    return storeSize;
+  }
+
+
+  /**
+   * Sets the value of the 'storeSize' field.
+   * @param value the value to set.
+   */
+  public void setStoreSize(int value) {
+    this.storeSize = value;
+  }
+
+  /**
    * Gets the value of the 'items' field.
    * @return The value of the 'items' field.
    */
@@ -288,6 +310,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     private java.lang.CharSequence store;
     private java.lang.CharSequence requestTime;
     private long customerID;
+    private int storeSize;
     private java.util.List<completeretail.item> items;
 
     /** Creates a new Builder */
@@ -321,9 +344,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
         this.customerID = data().deepCopy(fields()[4].schema(), other.customerID);
         fieldSetFlags()[4] = other.fieldSetFlags()[4];
       }
-      if (isValidValue(fields()[5], other.items)) {
-        this.items = data().deepCopy(fields()[5].schema(), other.items);
+      if (isValidValue(fields()[5], other.storeSize)) {
+        this.storeSize = data().deepCopy(fields()[5].schema(), other.storeSize);
         fieldSetFlags()[5] = other.fieldSetFlags()[5];
+      }
+      if (isValidValue(fields()[6], other.items)) {
+        this.items = data().deepCopy(fields()[6].schema(), other.items);
+        fieldSetFlags()[6] = other.fieldSetFlags()[6];
       }
     }
 
@@ -353,9 +380,13 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
         this.customerID = data().deepCopy(fields()[4].schema(), other.customerID);
         fieldSetFlags()[4] = true;
       }
-      if (isValidValue(fields()[5], other.items)) {
-        this.items = data().deepCopy(fields()[5].schema(), other.items);
+      if (isValidValue(fields()[5], other.storeSize)) {
+        this.storeSize = data().deepCopy(fields()[5].schema(), other.storeSize);
         fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.items)) {
+        this.items = data().deepCopy(fields()[6].schema(), other.items);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -558,6 +589,45 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
     }
 
     /**
+      * Gets the value of the 'storeSize' field.
+      * @return The value.
+      */
+    public int getStoreSize() {
+      return storeSize;
+    }
+
+
+    /**
+      * Sets the value of the 'storeSize' field.
+      * @param value The value of 'storeSize'.
+      * @return This builder.
+      */
+    public completeretail.Order.Builder setStoreSize(int value) {
+      validate(fields()[5], value);
+      this.storeSize = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'storeSize' field has been set.
+      * @return True if the 'storeSize' field has been set, false otherwise.
+      */
+    public boolean hasStoreSize() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'storeSize' field.
+      * @return This builder.
+      */
+    public completeretail.Order.Builder clearStoreSize() {
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
       * Gets the value of the 'items' field.
       * @return The value.
       */
@@ -572,9 +642,9 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @return This builder.
       */
     public completeretail.Order.Builder setItems(java.util.List<completeretail.item> value) {
-      validate(fields()[5], value);
+      validate(fields()[6], value);
       this.items = value;
-      fieldSetFlags()[5] = true;
+      fieldSetFlags()[6] = true;
       return this;
     }
 
@@ -583,7 +653,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       * @return True if the 'items' field has been set, false otherwise.
       */
     public boolean hasItems() {
-      return fieldSetFlags()[5];
+      return fieldSetFlags()[6];
     }
 
 
@@ -593,7 +663,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       */
     public completeretail.Order.Builder clearItems() {
       items = null;
-      fieldSetFlags()[5] = false;
+      fieldSetFlags()[6] = false;
       return this;
     }
 
@@ -607,7 +677,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
         record.store = fieldSetFlags()[2] ? this.store : (java.lang.CharSequence) defaultValue(fields()[2]);
         record.requestTime = fieldSetFlags()[3] ? this.requestTime : (java.lang.CharSequence) defaultValue(fields()[3]);
         record.customerID = fieldSetFlags()[4] ? this.customerID : (java.lang.Long) defaultValue(fields()[4]);
-        record.items = fieldSetFlags()[5] ? this.items : (java.util.List<completeretail.item>) defaultValue(fields()[5]);
+        record.storeSize = fieldSetFlags()[5] ? this.storeSize : (java.lang.Integer) defaultValue(fields()[5]);
+        record.items = fieldSetFlags()[6] ? this.items : (java.util.List<completeretail.item>) defaultValue(fields()[6]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
         throw e;
@@ -650,6 +721,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
 
     out.writeLong(this.customerID);
 
+    out.writeInt(this.storeSize);
+
     long size0 = this.items.size();
     out.writeArrayStart();
     out.setItemCount(size0);
@@ -680,6 +753,8 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
 
       this.customerID = in.readLong();
 
+      this.storeSize = in.readInt();
+
       long size0 = in.readArrayStart();
       java.util.List<completeretail.item> a0 = this.items;
       if (a0 == null) {
@@ -699,7 +774,7 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
       }
 
     } else {
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 7; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
           this.orderNumber = in.readLong();
@@ -722,6 +797,10 @@ public class Order extends org.apache.avro.specific.SpecificRecordBase implement
           break;
 
         case 5:
+          this.storeSize = in.readInt();
+          break;
+
+        case 6:
           long size0 = in.readArrayStart();
           java.util.List<completeretail.item> a0 = this.items;
           if (a0 == null) {

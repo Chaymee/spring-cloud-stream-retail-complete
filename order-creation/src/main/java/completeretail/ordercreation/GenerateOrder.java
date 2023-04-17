@@ -46,6 +46,8 @@ public class GenerateOrder {
 
         // Assign status
         order.setStatus("Created");
+
+        order.setStoreSize(random.nextInt(3));
     }
 
     /*

@@ -25,6 +25,10 @@
       "type":"long"
     },
     {
+      "name":"storeSize",
+      "type":"int"
+    },
+    {
       "name": "items",
       "type" : {
         "type": "array",

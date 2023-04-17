@@ -35,7 +35,7 @@ public class OrderCreationApplication {
 			GenerateOrder order = new GenerateOrder();
       JSONObject payload = new JSONObject(order.getOrder().toString());
 			
-      String topic = "retail/pos/" + order.getOrder().getStore().toString().toLowerCase().replaceAll(" ", "_");
+      String topic = "retail/pos/" + order.getOrder().getStore().toString().toLowerCase().replaceAll(" ", "_") + "/" + order.getOrder().getStoreSize();
       // Publish on dynamic topics
       System.out.println("Publishing on topic: " + topic);
       return MessageBuilder.withPayload(payload.toString(2)).setHeader(BinderHeaders.TARGET_DESTINATION, topic).build();
